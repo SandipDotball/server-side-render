@@ -82,9 +82,12 @@ var React = __webpack_require__(0);
 var renderToString = __webpack_require__(3).renderToString;
 var Home = __webpack_require__(4).default;
 
+app.use(express.static('public'));
+
 app.get('/', function (req, res) {
   var content = renderToString(React.createElement(Home, null));
-  res.send(content);
+  var html = '<!DOCTYPE html>\n  <html lang="en">\n  <head>\n    <meta charset="UTF-8"/>\n    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>\n    <title>Document</title>\n  </head>\n  <body>\n    <div id="root">' + content + '</div>\n    <script src="bundle.js"></script>\n  </body>\n  </html>';
+  res.send(html);
 });
 
 app.listen(3000, function () {
@@ -124,7 +127,15 @@ function Home() {
   return _react2.default.createElement(
     'div',
     null,
-    'This is a Home page Component'
+    'This is a Home page Component Hello baby',
+    ' ',
+    _react2.default.createElement(
+      'button',
+      { onClick: function onClick() {
+          return console.log('Hi');
+        } },
+      'CLick'
+    )
   );
 }
 
