@@ -60,34 +60,24 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 1);
+/******/ 	return __webpack_require__(__webpack_require__.s = 0);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ (function(module, exports) {
-
-module.exports = require("react");
-
-/***/ }),
-/* 1 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var express = __webpack_require__(2);
+var express = __webpack_require__(1);
 var app = express();
-var React = __webpack_require__(0);
-var renderToString = __webpack_require__(3).renderToString;
-var Home = __webpack_require__(4).default;
+var renderer = __webpack_require__(2).default;
 
 app.use(express.static('public'));
 
 app.get('/', function (req, res) {
-  var content = renderToString(React.createElement(Home, null));
-  var html = '<!DOCTYPE html>\n  <html lang="en">\n  <head>\n    <meta charset="UTF-8"/>\n    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>\n    <title>Document</title>\n  </head>\n  <body>\n    <div id="root">' + content + '</div>\n    <script src="bundle.js"></script>\n  </body>\n  </html>';
-  res.send(html);
+  res.send(renderer());
 });
 
 app.listen(3000, function () {
@@ -95,19 +85,13 @@ app.listen(3000, function () {
 });
 
 /***/ }),
-/* 2 */
+/* 1 */
 /***/ (function(module, exports) {
 
 module.exports = require("express");
 
 /***/ }),
-/* 3 */
-/***/ (function(module, exports) {
-
-module.exports = require("react-dom/server");
-
-/***/ }),
-/* 4 */
+/* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -117,7 +101,48 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _react = __webpack_require__(0);
+var _react = __webpack_require__(3);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _server = __webpack_require__(4);
+
+var _Home = __webpack_require__(5);
+
+var _Home2 = _interopRequireDefault(_Home);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = function () {
+  var content = (0, _server.renderToString)(_react2.default.createElement(_Home2.default, null));
+  var html = '<!DOCTYPE html>\n  <html lang="en">\n  <head>\n    <meta charset="UTF-8"/>\n    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>\n    <title>Document</title>\n  </head>\n  <body>\n    <div id="root">' + content + '</div>\n    <script src="bundle.js"></script>\n  </body>\n  </html>';
+  return html;
+};
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports) {
+
+module.exports = require("react");
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports) {
+
+module.exports = require("react-dom/server");
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(3);
 
 var _react2 = _interopRequireDefault(_react);
 
