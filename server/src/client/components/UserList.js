@@ -15,19 +15,24 @@ class UserList extends Component {
         <ul>
           {users &&
             users.length &&
-            users.map(user => <li key={user.id}>{user.name}</li>)}
+            users.map((user) => <li key={user.id}>{user.name}</li>)}
         </ul>
       </div>
     );
   }
 }
 
-const mapStateToProps = state => ({
-  users: state.users
+const mapStateToProps = (state) => ({
+  users: state.users,
 });
 
-const mapDispatchToProps = dispatch => ({
-  loadUser: () => dispatch(fetchUsers())
+const mapDispatchToProps = (dispatch) => ({
+  loadUser: () => dispatch(fetchUsers()),
 });
+
+export const loadData = (store) => {
+  console.dir('We need load Data from Users');
+  return store.dispatch(fetchUsers());
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserList);
