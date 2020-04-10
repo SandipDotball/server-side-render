@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 8);
+/******/ 	return __webpack_require__(__webpack_require__.s = 7);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -104,19 +104,21 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
 var _reactRouterDom = __webpack_require__(5);
 
-var _Home = __webpack_require__(6);
+var _UserListPage = __webpack_require__(13);
 
-var _Home2 = _interopRequireDefault(_Home);
+var _UserListPage2 = _interopRequireDefault(_UserListPage);
 
-var _UserList = __webpack_require__(14);
+var _HomePage = __webpack_require__(16);
 
-var _UserList2 = _interopRequireDefault(_UserList);
+var _HomePage2 = _interopRequireDefault(_HomePage);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -129,16 +131,13 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //   );
 // }
 
-var Routes = [{
+var Routes = [_extends({}, _HomePage2.default, {
   path: '/',
-  component: _Home2.default,
   exact: true
-}, {
+}), _extends({}, _UserListPage2.default, {
   path: '/users',
-  component: _UserList2.default,
-  exact: true,
-  loadData: _UserList.loadData
-}];
+  exact: true
+})];
 
 exports.default = Routes;
 
@@ -150,57 +149,22 @@ module.exports = require("react-router-dom");
 
 /***/ }),
 /* 6 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _react = __webpack_require__(0);
-
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function Home() {
-  return _react2.default.createElement(
-    'div',
-    null,
-    'This is a Home page Component Hello baby',
-    ' ',
-    _react2.default.createElement(
-      'button',
-      { onClick: function onClick() {
-          return console.log('Hi');
-        } },
-      'CLick'
-    )
-  );
-}
-
-exports.default = Home;
-
-/***/ }),
-/* 7 */
 /***/ (function(module, exports) {
 
 module.exports = require("react-redux");
 
 /***/ }),
-/* 8 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-__webpack_require__(9);
+__webpack_require__(8);
 
 var _reactRouterConfig = __webpack_require__(2);
 
-var _store = __webpack_require__(10);
+var _store = __webpack_require__(9);
 
 var _Routes = __webpack_require__(4);
 
@@ -240,13 +204,13 @@ app.listen(3000, function () {
 });
 
 /***/ }),
-/* 9 */
+/* 8 */
 /***/ (function(module, exports) {
 
 module.exports = require("babel-polyfill");
 
 /***/ }),
-/* 10 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -259,28 +223,31 @@ exports.store = undefined;
 
 var _redux = __webpack_require__(1);
 
-var _reduxThunk = __webpack_require__(11);
+var _reduxThunk = __webpack_require__(10);
 
 var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 
-var _reducers = __webpack_require__(12);
+var _reducers = __webpack_require__(11);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+if (typeof window === 'undefined') {
+  global.window = {};
+}
+var composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || _redux.compose;
 
-var store = exports.store = (0, _redux.createStore)(_reducers.rootReducer,
-//   composeEnhancers(applyMiddleware(thunk))
-(0, _redux.applyMiddleware)(_reduxThunk2.default));
+var store = exports.store = (0, _redux.createStore)(_reducers.rootReducer, window.INITIAL_STATE, composeEnhancers((0, _redux.applyMiddleware)(_reduxThunk2.default))
+// applyMiddleware(thunk)
+);
 
 /***/ }),
-/* 11 */
+/* 10 */
 /***/ (function(module, exports) {
 
 module.exports = require("redux-thunk");
 
 /***/ }),
-/* 12 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -293,7 +260,7 @@ exports.rootReducer = undefined;
 
 var _redux = __webpack_require__(1);
 
-var _userReducer = __webpack_require__(13);
+var _userReducer = __webpack_require__(12);
 
 var _userReducer2 = _interopRequireDefault(_userReducer);
 
@@ -304,7 +271,7 @@ var rootReducer = exports.rootReducer = (0, _redux.combineReducers)({
 });
 
 /***/ }),
-/* 13 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -331,7 +298,7 @@ var userReducer = function userReducer() {
 exports.default = userReducer;
 
 /***/ }),
-/* 14 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -340,7 +307,6 @@ exports.default = userReducer;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.loadData = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -348,9 +314,9 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRedux = __webpack_require__(7);
+var _reactRedux = __webpack_require__(6);
 
-var _userActions = __webpack_require__(15);
+var _userActions = __webpack_require__(14);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -360,16 +326,16 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var UserList = function (_Component) {
-  _inherits(UserList, _Component);
+var UserListPage = function (_Component) {
+  _inherits(UserListPage, _Component);
 
-  function UserList() {
-    _classCallCheck(this, UserList);
+  function UserListPage() {
+    _classCallCheck(this, UserListPage);
 
-    return _possibleConstructorReturn(this, (UserList.__proto__ || Object.getPrototypeOf(UserList)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (UserListPage.__proto__ || Object.getPrototypeOf(UserListPage)).apply(this, arguments));
   }
 
-  _createClass(UserList, [{
+  _createClass(UserListPage, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
       this.props.loadUser();
@@ -402,7 +368,7 @@ var UserList = function (_Component) {
     }
   }]);
 
-  return UserList;
+  return UserListPage;
 }(_react.Component);
 
 var mapStateToProps = function mapStateToProps(state) {
@@ -419,15 +385,18 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   };
 };
 
-var loadData = exports.loadData = function loadData(store) {
+var loadData = function loadData(store) {
   console.dir('We need load Data from Users');
   return store.dispatch((0, _userActions.fetchUsers)());
 };
 
-exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(UserList);
+exports.default = {
+  loadData: loadData,
+  component: (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(UserListPage)
+};
 
 /***/ }),
-/* 15 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -438,7 +407,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.fetchUsers = undefined;
 
-var _axios = __webpack_require__(16);
+var _axios = __webpack_require__(15);
 
 var _axios2 = _interopRequireDefault(_axios);
 
@@ -486,10 +455,46 @@ var fetchUsers = exports.fetchUsers = function fetchUsers() {
 };
 
 /***/ }),
-/* 16 */
+/* 15 */
 /***/ (function(module, exports) {
 
 module.exports = require("axios");
+
+/***/ }),
+/* 16 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function HomePage() {
+  return _react2.default.createElement(
+    'div',
+    null,
+    'This is a Home page Component Hello baby',
+    _react2.default.createElement(
+      'button',
+      { onClick: function onClick() {
+          return console.log('Hi');
+        } },
+      'CLick'
+    )
+  );
+}
+
+exports.default = {
+  component: HomePage
+};
 
 /***/ }),
 /* 17 */
@@ -512,11 +517,11 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _serializeJavascript = __webpack_require__(20);
+
+var _serializeJavascript2 = _interopRequireDefault(_serializeJavascript);
+
 var _server = __webpack_require__(19);
-
-var _Home = __webpack_require__(6);
-
-var _Home2 = _interopRequireDefault(_Home);
 
 var _reactRouterDom = __webpack_require__(5);
 
@@ -526,7 +531,7 @@ var _Routes = __webpack_require__(4);
 
 var _Routes2 = _interopRequireDefault(_Routes);
 
-var _reactRedux = __webpack_require__(7);
+var _reactRedux = __webpack_require__(6);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -546,7 +551,10 @@ exports.default = function (req, store) {
       )
     )
   ));
-  var html = '<!DOCTYPE html>\n  <html lang="en">\n  <head>\n    <meta charset="UTF-8"/>\n    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>\n    <title>Document</title>\n  </head>\n  <body>\n    <div id="root">' + content + '</div>\n    <script src="bundle.js"></script>\n  </body>\n  </html>';
+
+  // window.INITIAL_STATE = ${serialize(store.getState())}
+
+  var html = '<!DOCTYPE html>\n  <html lang="en">\n  <head>\n    <meta charset="UTF-8"/>\n    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>\n    <title>Document</title>\n  </head>\n  <body>\n    <div id="root">' + content + '</div>\n    <script type="text/javascript">\n      window.INITIAL_STATE = ' + JSON.stringify(store.getState()) + '\n    </script>\n    <script src="bundle.js"></script>\n  </body>\n  </html>';
   return html;
 };
 
@@ -555,6 +563,12 @@ exports.default = function (req, store) {
 /***/ (function(module, exports) {
 
 module.exports = require("react-dom/server");
+
+/***/ }),
+/* 20 */
+/***/ (function(module, exports) {
+
+module.exports = require("serialize-javascript");
 
 /***/ })
 /******/ ]);

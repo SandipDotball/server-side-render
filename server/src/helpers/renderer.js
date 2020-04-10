@@ -1,6 +1,6 @@
 import React from 'react';
+import serialize from 'serialize-javascript';
 import { renderToString } from 'react-dom/server';
-import Home from '../client/components/Home';
 import { StaticRouter } from 'react-router-dom';
 import { renderRoutes } from 'react-router-config';
 import Routes from '../client/Routes';
@@ -17,6 +17,9 @@ export default (req, store) => {
       </StaticRouter>
     </Provider>
   );
+
+  // window.INITIAL_STATE = ${serialize(store.getState())}
+
   const html = `<!DOCTYPE html>
   <html lang="en">
   <head>
@@ -26,6 +29,9 @@ export default (req, store) => {
   </head>
   <body>
     <div id="root">${content}</div>
+    <script type="text/javascript">
+      window.INITIAL_STATE = ${JSON.stringify(store.getState())}
+    </script>
     <script src="bundle.js"></script>
   </body>
   </html>`;
